@@ -41,7 +41,7 @@ class CategoryController extends AbstractController
     {
         $category = $this->getDoctrine()
             ->getRepository(Category::class)
-            ->findBy(['name'  => $categoryName]);
+            ->findBy(['name' => $categoryName]);
 
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
