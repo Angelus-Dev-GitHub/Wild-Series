@@ -25,24 +25,5 @@ class SeasonController extends AbstractController
         ]);
     }
 
-    /**
-     * Getting episodes by id
-     *
-     * @Route("/show/{season}", name="show")
-     *
-     *
-     */
-    /*public function show(Season $season): Response
-    {
-        $episodes = $this->getDoctrine()
-            ->getRepository(Episode::class)
-            ->findBy(['season' => $season]);
-
-        return $this->render('season/show.html.twig', [
-           'episodes' => $episodes,
-            'season' => $season,
-        ]);
-    }*/
-
 
 }
