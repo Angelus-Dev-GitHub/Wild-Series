@@ -5,12 +5,9 @@
 {% block body %}
     <h1>Série {{ program.title }}</h1>
     <h2>Saison {{ season.number }}</h2>
+    <h3>Episode: {{ episode.title }}</h3>
     <div>
-        {% for episode in episodes %}
-            <li>
-                <h5>{{ episode.number }} - {{ episode.title }} - Synopsis : {{ episode.synopsis }}</h5>
-            </li>
-        {% endfor %}
+       <p>{{ episode.synopsis }}</p>
     </div>
 
     <a href="{{ path('program_index') }}">
