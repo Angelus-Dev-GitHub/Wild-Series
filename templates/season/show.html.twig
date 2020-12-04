@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}All Episodes{% endblock %}
+{% block title %}All Seasons{% endblock %}
 
 {% block body %}
-    <h1>Toutes les épisodes de la Saison {{ seasonID }}</h1>
-    {% for episode in episodes %}
+    <h1>Toutes les saisons de la Série {{ program.title }}</h1>
         <div>
-            <h5>{{ episode.number }} - {{ episode.title }}</h5>
-            <p>{{ episode.synopsis }}</p>
-            {# Lien vers la fiche de la série : #}
+            {% for season in seasons %}
+                <li>
+                    <h5>saison {{ season.number }} - {{ season.year }} - Description : {{ season.description }}</h5>
+                    <a href="{{ path("program_season_episode", { "program_id": program.id, "season_number": season.number}) }}">Voir les épisodes</a>
+                </li>
+            {% endfor %}
         </div>
-    {% else %}
-        Aucun épisode trouvé.
-    {% endfor %}
 
     <a href="{{ path('program_index') }}">
         Retour à la liste des séries

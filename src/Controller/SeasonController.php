@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Episode;
+use App\Entity\Season;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,20 +28,21 @@ class SeasonController extends AbstractController
     /**
      * Getting episodes by id
      *
-     * @Route("/show/{seasonId}", name="show")
+     * @Route("/show/{season}", name="show")
+     *
      *
      */
-    public function show(int $seasonId): Response
+    /*public function show(Season $season): Response
     {
         $episodes = $this->getDoctrine()
             ->getRepository(Episode::class)
-            ->findBy(['season' => $seasonId]);
+            ->findBy(['season' => $season]);
 
         return $this->render('season/show.html.twig', [
            'episodes' => $episodes,
-            'seasonID' => $seasonId
+            'season' => $season,
         ]);
-    }
+    }*/
 
 
 }
