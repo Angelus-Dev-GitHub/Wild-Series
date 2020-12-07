@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Actor;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
@@ -81,7 +82,7 @@ class ProgramController extends AbstractController
 
         return $this->render('program/show.html.twig', [
             'program' => $program_id,
-            'seasons'=> $seasons
+            'seasons'=> $seasons,
         ]);
     }
 
