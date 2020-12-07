@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Episode;
+use App\Entity\Program;
 use App\Entity\Season;
 use App\Form\SeasonType;
 use App\Repository\SeasonRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +51,11 @@ class SeasonController extends AbstractController
         ]);
     }
 
+
+
     /**
      * @Route("/{id}", name="season_show", methods={"GET"})
-     */
+    */
     public function show(Season $season): Response
     {
         return $this->render('season/show.html.twig', [

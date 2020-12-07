@@ -92,7 +92,7 @@ class ProgramController extends AbstractController
      * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"program_id": "id"}})
      * @ParamConverter ("season", class="App\Entity\Season", options={"mapping": {"season_number": "number"}})
      *
-     */
+    */
     public function showSeason(Program $program, Season $season): Response
     {
         $episodes = $this->getDoctrine()
