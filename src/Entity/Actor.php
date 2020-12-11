@@ -59,6 +59,7 @@ class Actor
         return $this->programs;
     }
 
+
     public function addProgram(Program $program): self
     {
         if (!$this->programs->contains($program)) {
