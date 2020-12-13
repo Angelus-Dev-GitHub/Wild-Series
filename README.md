@@ -18,3 +18,5 @@ https://www.loom.com/share/0a426fc5f6874a1ea1d1903865324ca4
 Quête 17 - Lien Loom:
 https://www.loom.com/share/86563a959256487e82ce3679284400ce
 Quête 18 - Lien Loom:
+https://www.loom.com/share/fac6ecbbf21942b98dff72f5416acc0a
+Quête 19 - Lien Loom:
