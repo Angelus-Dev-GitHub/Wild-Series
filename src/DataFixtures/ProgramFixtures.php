@@ -4,12 +4,11 @@
 namespace App\DataFixtures;
 
 
-//use App\Entity\Category;
 use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-//use phpDocumentor\Reflection\Types\Self_;
+use Faker;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -43,12 +42,14 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $faker = Faker\Factory::create('en_US');
         $i=1;
         foreach (self::PROGRAMS as $title => $data) {
             $program = new Program();
             $program->setTitle($title);
             $program->setSummary($data['summary']);
             $program->setCategory($this->getReference('category_' . rand(1,5)));
+            $program->setPoster($faker->imageUrl('640', '480', 'city'));
             $manager->persist($program);
             $this->addReference('program_' . $i, $program);
             $i++;
