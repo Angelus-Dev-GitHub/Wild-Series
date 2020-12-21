@@ -3,7 +3,7 @@
 {% block title %}Episode{% endblock %}
 
 {% block body %}
-    <h1>Episode</h1>
+    <h2>Episode</h2>
 
     <table class="table">
         <tbody>
@@ -29,6 +29,10 @@
     <a href="{{ path('episode_index') }}">back to list</a>
 
     <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">edit</a>
+
+    {% if app.user %}
+
+    {% endif %}
 
     {{ include('episode/_delete_form.html.twig') }}
 {% endblock %}

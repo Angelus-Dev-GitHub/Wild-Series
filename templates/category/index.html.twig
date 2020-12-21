@@ -3,10 +3,10 @@
 {% block title %}All categories{% endblock %}
 
 {% block body %}
-    <h1>Toutes les catégoeries des séries : </h1>
+    <h2>Toutes les catégoeries des séries : </h2>
     {% for category in categories %}
         <div>
-            <h2>{{ category.name }}</h2>
+            <h3>{{ category.name }}</h3>
             <a href="{{ path("category_show", { categoryName: category.name }) }}">Voir les séries</a>
         </div>
     {% else %}

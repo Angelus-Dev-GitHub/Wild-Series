@@ -2,10 +2,10 @@
 {% block title %}Catégorie #{{ category }}{% endblock %}
 
 {% block body %}
-    <h1>Toutes les séries de la catégorie {{ category}} : </h1>
+    <h2>Toutes les séries de la catégorie {{ category}} : </h2>
     {% for program in programs %}
     <div>
-        <h2>{{ program.id }}/{{ program.title }}</h2>
+        <h3>{{ program.id }}/{{ program.title }}</h3>
         <p>{{ program.summary }}</p>
         <a href="{{ path("program_show", { "program_id": program.id }) }}">Voir la fiche</a>
     </div>

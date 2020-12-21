@@ -4,10 +4,10 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
-    <h1>Toutes les séries de la table program : </h1>
+    <h2>Toutes les séries de la table program : </h2>
     {% for program in programs %}
         <div>
-            <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+            <h3>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h3>
             <p>{{ program.summary }}</p>
             <a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
         </div>
