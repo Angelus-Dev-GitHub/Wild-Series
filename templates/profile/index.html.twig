@@ -1,0 +1,17 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}Mon profil{% endblock %}
+  {% block body %}<h2>Bienvenue sur ta page, {{ app.user.email }}</h2>
+      {% if userPrograms is empty %}
+          <p>Tu n'as aucune série ajoutée pour le moment. </p>
+      {% else %}
+          <p>Voici les séries que tu as ajouté :</p>
+          {% for program in userPrograms %}
+              <ul>
+                  <li>
+                      <a href="{{ path("program_show", { programSlug: program.slug }) }}">{{ program.title }}</a>
+                  </li>
+              </ul>
+          {% endfor %}
+      {% endif %}
+  {% endblock %}
