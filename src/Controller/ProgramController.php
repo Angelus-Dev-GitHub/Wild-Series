@@ -20,6 +20,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ProgramType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @Route("/programs", name="program_")
@@ -56,6 +57,7 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
+            $program->setOwner($this->getUser());
             $entityManager->persist($program);
             $entityManager->flush();
             $email = (new Email())
@@ -76,18 +78,19 @@ class ProgramController extends AbstractController
 
     /**
      *
-     * @Route("/{slug}", methods={"GET"}, name="show")
+     * @Route("/{programSlug}", methods={"GET"}, name="show")
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"programSlug": "slug"}})
      *
      * @return Response
      */
-    public function show(Program $program_id): Response
+    public function show(Program $program): Response
     {
         $seasons = $this->getDoctrine()
             ->getRepository(Season::class)
-            ->findBy(['program' => $program_id]);
+            ->findBy(['program' => $program]);
 
         return $this->render('program/show.html.twig', [
-            'program' => $program_id,
+            'program' => $program,
             'seasons'=> $seasons,
         ]);
     }
@@ -132,7 +135,7 @@ class ProgramController extends AbstractController
         $user = $this->getUser();
         if($form->isSubmitted() && $form->isValid()){
             $entityManager = $this->getDoctrine()->getManager();
-            $comment->setAuthor($user);
+            $comment->setAuthor($this->getUser());
             $comment->setEpisode($episode);
             $entityManager->persist($comment);
             $entityManager->flush();
@@ -149,4 +152,49 @@ class ProgramController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/{programSlug}/edit", name="edit", methods={"GET","POST"})
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"programSlug": "slug"}})
+     */
+    public function edit(Request $request, Program $program): Response
+    {
+        if (!($this->getUser() == $program->getOwner())) {
+            // If not the owner, throws a 403 Access Denied exception
+        throw new AccessDeniedException('Only the owner can edit the program!');
+        }
+
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="delete", methods={"DELETE"})
+     *
+     */
+    public function delete(Request $request, Program $program): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($program);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('program_index');
+    }
+
+
+
+
 }

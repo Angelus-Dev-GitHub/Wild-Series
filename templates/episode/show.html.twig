@@ -32,29 +32,7 @@
 
     {{ include('episode/_delete_form.html.twig') }}
 
-    <table>
-        <tr>
-            <th>Commentaire</th>
-            <th></th>
-            <th>Rate</th>
-            <th>User</th>
-        </tr>
-    {% for comment in comments %}
-        <tr>
-            <th>{{ comment.comment }}</th>
-            <th></th>
-            <th>{{ comment.rate }}</th>
-            <th>{{ comment.author.email }}</th>
-        </tr>
-    {% endfor %}
-    </table>
-    {% if app.user %}
-        <h5>Ajouter un commentaire</h5>
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button class="btn">{{ button_label|default('Save') }}</button>
-        {{ form_end(form) }}
-    {% endif %}
-
+    <a href="{{ path('comment_show', {'id': episode.id}) }}">Voir les commentaires</a>
+    <a href="{{ path('comment_new', {'episodeSlug': episode.slug}) }}">Ajouter un commentaire</a>
 
 {% endblock %}

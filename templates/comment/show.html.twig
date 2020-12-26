@@ -1,0 +1,41 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Comment{% endblock %}
+
+{% block body %}
+    <h2>Comment</h2>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ comment.id }}</td>
+        </tr>
+        <tr>
+            <th>Comment</th>
+            <td>{{ comment.comment }}</td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td>{{ comment.rate }}</td>
+        </tr>
+        <tr>
+            <th>Episode</th>
+            <td>{{ comment.episode.id }}</td>
+        </tr>
+        <tr>
+            <th>Author</th>
+            <td>{{ comment.author.email }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('comment_index') }}">back to list</a>
+
+    <a href="{{ path('comment_edit', {'id': comment.id}) }}">edit</a>
+
+    {% if (is_granted('ROLE_ADMIN') or ((is_granted('ROLE_CONTRIBUTOR')) and (app.user.email == comment.author.email))) %}
+        {{ include('comment/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}

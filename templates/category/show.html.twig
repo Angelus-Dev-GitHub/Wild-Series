@@ -7,10 +7,10 @@
     <div>
         <h3>{{ program.id }}/{{ program.title }}</h3>
         <p>{{ program.summary }}</p>
-        <a href="{{ path("program_show", { "program_id": program.id }) }}">Voir la fiche</a>
+        <a href="{{ path("program_show", { "programSlug": program.slug }) }}">Voir la fiche</a>
     </div>
     {% else %}
-        Aucune série trouvée.
+        <p>Aucune série trouvée.</p>
     {% endfor %}
 
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Program;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,7 @@ class CategoryController extends AbstractController
      * The controller for the category add form
      *
      * @Route("/new", name="new")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function new(Request $request) : Response
     {
@@ -77,15 +79,7 @@ class CategoryController extends AbstractController
 
         $programs = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findBy(['category' => $category],
-                    ['id' => 'DESC'],
-                    $limit = 3
-            );
-        if (!$programs) {
-            throw $this->createNotFoundException(
-                'No program with category : '.$categoryName.' found in program\'s table.'
-            );
-        }
+            ->findBy(['category' => $category]);
         return $this->render('category/show.html.twig', [
             'programs' => $programs,
             'category' => $categoryName

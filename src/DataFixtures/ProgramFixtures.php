@@ -57,9 +57,11 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setTitle($title);
             $slugTitle = $this->slugify->generate($title);
             $program->setSlug($slugTitle);
+            $program->setOwner($this->getReference('contributor'));
             $program->setSummary($data['summary']);
             $program->setCategory($this->getReference('category_' . rand(1,5)));
-            $program->setPoster($faker->imageUrl($width=640, $height=480, 'city'));
+            $program->setPoster('https://picsum.photos/600/300?random=' . $i);
+
             $manager->persist($program);
             $this->addReference('program_' . $i, $program);
             $i++;

@@ -20,12 +20,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/categories/">All</a>
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Comédie</a>
-                    <a class="dropdown-item" href="#">Animation</a>
-                    <a class="dropdown-item" href="#">Horreur</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="/categories/Action">Action</a>
+                    <a class="dropdown-item" href="/categories/Aventure">Aventure</a>
+                    <a class="dropdown-item" href="/categories/Animation">Animation</a>
+                    <a class="dropdown-item" href="/categories/Horreur">Horreur</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -33,12 +31,12 @@
                     Acteurs
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Keanu Reeves</a>
+                    <a class="dropdown-item" href="/actors/Keanu">Keanu Reeves</a>
                     <a class="dropdown-item" href="#">Mel Gibson</a>
                     <a class="dropdown-item" href="#">Clint Eastwood</a>
                     <a class="dropdown-item" href="#">Anna Kendrick</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="/actor">All actors</a>
                 </div>
             </li>
             {# <li class="nav-item">
@@ -55,6 +53,7 @@
                     <a class="dropdown-item" href="{{ path("season_new") }}">Add new season</a>
                     <a class="dropdown-item" href="{{ path("episode_index") }}">All episode</a>
                     <a class="dropdown-item" href="{{ path("episode_new") }}">Add new Episode</a>
+                    <a class="dropdown-item" href="{{ path("comment_index") }}">All comments</a>
                 </div>
             </li>
         </ul>

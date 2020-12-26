@@ -19,6 +19,18 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $contributor1 = new User();
+        $contributor1->setEmail('t.dufosse666@gmail.com');
+        $contributor1->setRoles(['ROLE_CONTRIBUTOR']);
+        $contributor1->setPassword($this->passwordEncoder->encodePassword(
+            $contributor1,
+            'thierryrpassword'
+        ));
+        $manager->persist($contributor1);
+        $this->addReference('contributor', $contributor1);
+
+
+        // Création d’un utilisateur de type “contributor”
         $contributor = new User();
         $contributor->setEmail('subscriber@monsite.com');
         $contributor->setRoles(['ROLE_CONTRIBUTOR']);
