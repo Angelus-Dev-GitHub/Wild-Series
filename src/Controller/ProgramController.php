@@ -169,7 +169,7 @@ class ProgramController extends AbstractController
     {
         if (!($this->getUser() == $program->getOwner())) {
             // If not the owner, throws a 403 Access Denied exception
-        throw new AccessDeniedException('Only the owner can edit the program!');
+            throw new AccessDeniedException('Only the owner can edit the program!');
         }
 
         $form = $this->createForm(ProgramType::class, $program);
