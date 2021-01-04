@@ -53,6 +53,7 @@ class EpisodeController extends AbstractController
                 ->html($this->renderView('episode/newEpisodeEmail.html.twig',
                     [ 'episode' => $episode]));
             $mailer->send($email);
+            $this->addFlash('success', 'Vous avez bien ajouter un nouvel épisode');
 
             return $this->redirectToRoute('episode_index');
         }
@@ -85,6 +86,7 @@ class EpisodeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Vous avez bien modifié l\'épisode');
 
             return $this->redirectToRoute('episode_index');
         }
@@ -104,8 +106,10 @@ class EpisodeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($episode);
             $entityManager->flush();
+
         }
 
+        $this->addFlash('danger', 'Vous avez supprimé un épisode');
         return $this->redirectToRoute('episode_index');
     }
 }

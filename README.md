@@ -28,4 +28,13 @@ https://www.loom.com/share/9b52a2a29a6843a68f1f1fbe7785e0a6
 Quête 22 - Lien Loom:
 https://www.loom.com/share/c1540e4d32494c63be99130a05ead23b
 Quête 23 - Lien Loom:
+https://www.loom.com/share/76641d4f6f274fbe948dde1f38e92f2b
+Quête 24 - Lien Loom:
+
+Quête 25 - Lien Lomm:
+
+Quête 26 - Lien Loom:
+
+Quête 27 - Lien Loom: 
+
 

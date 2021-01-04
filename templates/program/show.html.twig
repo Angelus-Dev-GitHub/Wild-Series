@@ -27,7 +27,7 @@
                     <li>Aucun acteur pour cette série</li>
                 {% endfor %}
             </ul>
-            {% if is_granted("ROLE_ADMIN") %}
+            {% if is_granted("ROLE_CONTRIBUTOR") %}
 
                 <a href="{{ path('program_edit', { 'programSlug': program.slug} ) }}">Éditer</a>
 

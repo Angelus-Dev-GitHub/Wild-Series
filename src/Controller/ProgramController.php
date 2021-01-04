@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +36,8 @@ class ProgramController extends AbstractController
      * @Route("/", name="index")
      * @return Response response instance
      */
-    public function index(Request $request, ProgramRepository $programRepository): Response
+    public function index(Request $request,
+                          ProgramRepository $programRepository): Response
     {
         $form = $this->createForm(SearchProgramType::class);
         $form->handleRequest($request);
@@ -76,6 +78,7 @@ class ProgramController extends AbstractController
                     ['program' => $program]));
             $mailer->send($email);
 
+            $this->addFlash('success', 'Vous avez bien ajouté une nouvelle série');
             return $this->redirectToRoute('program_index');
         }
         return $this->render('program/new.html.twig', [
@@ -152,6 +155,7 @@ class ProgramController extends AbstractController
             ->getRepository(Comment::class)
             ->findBy(['episode' => $episode]);
 
+
         return $this->render('episode/show.html.twig', [
             'program' => $program,
             'season' => $season,
@@ -177,6 +181,7 @@ class ProgramController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'Vous avez bien modifié la série');
 
             return $this->redirectToRoute('program_index');
         }
@@ -199,6 +204,7 @@ class ProgramController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('danger', 'Vous avez supprimé une série');
         return $this->redirectToRoute('program_index');
     }
 
