@@ -11,7 +11,11 @@
     {{ form_end(form) }}
     {% for program in programs %}
         <div class="card" style="width: 25rem;">
-            <img class="card-img-top" src="{{ program.poster }}" alt="{{ program.title }}">
+            {% if(program.updatedAt) %}
+                <img class="card-img-top" src="/uploads/{{ program.poster }}" alt="{{ program.title }}">
+            {% else %}
+                <img class="card-img-top" src="{{ program.poster }}" alt="{{ program.title }}">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ program.title }}</h5>
                 <h6 class="card-text">Catégorie: {{ program.category.name }}</h6>
@@ -19,11 +23,6 @@
                 <a href="{{ path("program_show", { programSlug: program.slug }) }}" class="btn btn-primary">Voir la fiche</a>
             </div>
         </div>
-            {# <h3>{{ loop.index }} / {{ program.title }}</h3>
-            <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-            <p>Catégorie : {{ program.category.name }}</p>
-            <a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
-            #}
     {% else %}
         Aucune série trouvée.
     {% endfor %}

@@ -6,7 +6,11 @@
 
     <div class="media">
         <div>
-            <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+            {% if (program.updatedAt) %}
+                <img class="align-self-start mr-3" src="/uploads/{{ program.poster }}" alt="{{ program.title }} poster">
+            {% else %}
+                <img class="align-self-start mr-3" src="{{ program.poster }}" alt="{{ program.title }} poster">
+            {% endif %}
         </div>
         <div class="media-body">
             <h2 class="mt-0">{{ program.title }}</h2>
@@ -28,9 +32,7 @@
                 {% endfor %}
             </ul>
             {% if is_granted("ROLE_CONTRIBUTOR") %}
-
                 <a href="{{ path('program_edit', { 'programSlug': program.slug} ) }}">Éditer</a>
-
             {%endif%}
         </div>
     </div>
