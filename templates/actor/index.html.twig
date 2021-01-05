@@ -7,8 +7,9 @@
 
     {% for actor in actors %}
         <div>
-            <p>{{ loop.index }} / {{ actor.name }}</p>
+            <p>{{ loop.index }} / {{ actor.name }} / {{ actor.poster }}</p>
             <a href="{{ path("actor_show", { "actor_id": actor.id }) }}">Voir sa filmographie</a>
+            <a href="{{ path("actor_edit", { "actor_id": actor.id }) }}">Modifier</a>
         </div>
     {% else %}
         Aucune acteur trouvé.
